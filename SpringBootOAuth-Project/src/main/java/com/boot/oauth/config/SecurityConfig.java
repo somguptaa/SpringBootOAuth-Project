@@ -29,7 +29,7 @@ public class SecurityConfig {
             )
 
             // Enables OAuth2 login support
-            // Example: Login with Facebook using client-id and secret
+            // Example: Login with Facebook, Google, GitHub using client-id and secret
             .oauth2Login(withDefaults())
 
             // Enables default Spring Security login page
