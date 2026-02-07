@@ -99,7 +99,7 @@ It supports both form login and OAuth2 login.
 
 ---
 
-### 👤 Secured User Page (`/user`)
+### Secured User Page (`/user`)
 Accessible only after successful authentication via OAuth or form login.
 
 ![User Page](./screenshots/user.png)
