@@ -25,7 +25,7 @@ public class SecurityConfig {
 
                     // Protected URL: user must be logged in to access "/user"
                     // Login can be via form login, OAuth2, or basic auth
-                    .requestMatchers("/user").authenticated()
+                    .requestMatchers("/user","/details").authenticated()
             )
 
             // Enables OAuth2 login support
