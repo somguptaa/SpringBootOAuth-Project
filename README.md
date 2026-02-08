@@ -1,7 +1,7 @@
 # Spring Boot OAuth Learning Project
 
 This is my **learning project** created to understand **Spring Boot Security** with **OAuth2 authentication**.  
-The main goal of this project is to learn how authentication and authorization work in a Spring Boot application using **multiple OAuth providers**.
+The main goal of this project is to learn how **authentication and authorization** work in a Spring Boot application using **multiple OAuth providers**, and how to **access authenticated user details after login**.
 
 This project was built as part of my continuous learning and hands-on practice with **Spring Boot and Spring Security**.
 
@@ -10,18 +10,22 @@ This project was built as part of my continuous learning and hands-on practice w
 ## Project Purpose
 
 I built this project to:
+
 - Learn Spring Security configuration using `SecurityFilterChain`
 - Understand how OAuth2 login works in Spring Boot
 - Practice securing endpoints with authentication rules
 - Explore multiple authentication mechanisms in a single application
 - Learn how Spring Security integrates with third-party OAuth providers
+- Understand how to access logged-in user details using `Principal` and `Authentication`
+- Identify OAuth provider information (GitHub, Google, Facebook) after login
 
 ---
 
 ## What This Project Does
 
 - Provides a **public endpoint** (`/home`) accessible to everyone
-- Provides a **secured endpoint** (`/user`) that requires authentication
+- Provides **secured endpoints** (`/user`, `/details`) that require authentication
+- Displays **authenticated user details** after login
 - Supports multiple authentication methods:
   - OAuth2 login using **GitHub**
   - OAuth2 login using **Google**
@@ -34,14 +38,39 @@ I built this project to:
 ## How It Works
 
 1. When a user accesses `/home`, no authentication is required.
-2. When a user accesses `/user`, Spring Security checks if the user is authenticated.
+2. When a user accesses `/user` or `/details`, Spring Security checks if the user is authenticated.
 3. If the user is not authenticated, Spring Security redirects to the login page.
 4. The user can authenticate using:
    - GitHub OAuth
    - Google OAuth
    - Facebook OAuth
-   - Username and password
-5. After successful authentication, the secured endpoint becomes accessible.
+   - Username and password (form login)
+5. After successful authentication:
+   - Secured endpoints become accessible
+   - Logged-in user details are displayed
+   - OAuth provider information can be identified
+
+---
+
+## User Details & OAuth Provider Handling
+
+This project demonstrates how to:
+
+- Access the logged-in user using:
+  - `Principal`
+  - `Authentication`
+  - `SecurityContextHolder`
+- Retrieve:
+  - Username
+  - Authorities / roles
+  - Authentication status
+  - OAuth attributes (name, email, provider-specific details)
+- Detect which OAuth provider was used for login (GitHub, Google, Facebook)
+
+### Key Learning
+
+- **`Principal`** → Provides only the logged-in username  
+- **`Authentication`** → Provides complete security-related details of the user
 
 ---
 
@@ -70,7 +99,8 @@ I built this project to:
 
 ### Controller
 - `/home` → Public endpoint
-- `/user` → Secured endpoint (requires authentication)
+- `/user` → Secured endpoint
+- `/details` → Displays authenticated user details and OAuth provider information
 
 ### application.properties
 - Application configuration
@@ -85,36 +115,30 @@ I built this project to:
 ## Application Screenshots
 
 ### Public Home Page (`/home`)
-This endpoint is accessible without authentication.
-
-![Public Home Page](./screenshots/home.png)
-
----
+Accessible without authentication.
 
 ### Login Page
-Spring Security automatically redirects unauthenticated users to this login page.  
-It supports both form login and OAuth2 login.
+Automatically shown for unauthenticated users.  
+Supports form login and OAuth2 login with multiple providers.
 
-![Login Page](./screenshots/login_page.png)
-
----
-
-### Secured User Page (`/user`)
-Accessible only after successful authentication via OAuth or form login.
-
-![User Page](./screenshots/user.png)
+### Secured User / Details Page
+Accessible only after successful authentication.  
+Displays logged-in user information and OAuth provider details.
 
 ---
 
 ## My Learning Experience
 
 Through this project, I learned:
-- How Spring Security intercepts HTTP requests
+
+- How Spring Security intercepts and secures HTTP requests
 - How to configure security using `SecurityFilterChain`
 - How OAuth2 login works without managing passwords manually
 - How Spring Boot simplifies OAuth2 integration
 - How multiple OAuth providers can coexist in one application
-- How different authentication mechanisms work together
+- How to access authenticated user information using Spring Security
+- How `Principal`, `Authentication`, and `SecurityContextHolder` differ
+- How OAuth provider-specific user attributes are exposed
 
 This project helped me gain confidence with **Spring Security and OAuth2**, which I previously found challenging.
 
@@ -130,14 +154,14 @@ This project helped me gain confidence with **Spring Security and OAuth2**, whic
 
 ## Future Learning Goals
 
-- Display authenticated user details (name, email, OAuth provider)
 - Implement role-based authorization
-- Store users in a database
+- Store authenticated users in a database
 - Customize OAuth login success handling
 - Add logout and session management
-
 ---
+
 ## Final Thoughts
 
-This project reflects my hands-on learning journey with Spring Boot Security and OAuth2, turning complex concepts into practical understanding through real implementation.
+This project reflects my hands-on learning journey with **Spring Boot Security and OAuth2**, gradually building understanding by implementing real features like **user detail extraction and OAuth provider identification**.
 
+Each enhancement made the internal working of Spring Security clearer and more practical.
