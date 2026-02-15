@@ -112,18 +112,29 @@ This project demonstrates how to:
 
 ---
 
-## Application Screenshots
+## 📸 Application Screenshots
 
 ### Public Home Page (`/home`)
 Accessible without authentication.
+
+![Home Page](screenshots/home.png)
+
+---
 
 ### Login Page
 Automatically shown for unauthenticated users.  
 Supports form login and OAuth2 login with multiple providers.
 
+![Login Page](screenshots/login_page.png)
+
+---
+
 ### Secured User / Details Page
 Accessible only after successful authentication.  
 Displays logged-in user information and OAuth provider details.
+
+![User Page](screenshots/user.png)
+
 
 ---
 
